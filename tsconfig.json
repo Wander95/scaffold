@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+      "target": "es5",
+      "module": "commonjs",
+      "sourceMap": true,
+      "outDir": "./dist",
+      "rootDir": "./src",
+      "strictPropertyInitialization": false,
+      /* Strict Type-Checking Options */
+      "strict": true,
+      "noImplicitAny": true,
+      /* Module Resolution Options */
+      "moduleResolution": "node",
+      "baseUrl": "./src",
+      "esModuleInterop": true,
+      /* Advanced Options */
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+  },
+  "paths": {
+    "@src/*": ["src/*"],
+    // Just as an example of what you can
+    "@services/*": ["src/services/*"],
+    // Or even cooler
+    "@/*": ["src/*"]
+  },
+  "lib": ["es2015"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+  ],
+  "exclude": ["node_modules"]
+}
