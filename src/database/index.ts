@@ -1,17 +1,19 @@
 import { Sequelize } from 'sequelize';
+const SequelizeDB = require('sequelize');
+
 import CONFIG from '../config/index';
 
 class sequelize {
   private connection:Sequelize;
 
   constructor(){
-    this.connection = new Sequelize(
+    this.connection = new SequelizeDB(
       CONFIG.DB_CONFIG.SEQUELIZE_DB, 
       CONFIG.DB_CONFIG.SEQUELIZE_USER, 
       CONFIG.DB_CONFIG.SEQUELIZE_PASSWORD, {
         host: CONFIG.DB_CONFIG.SEQUELIZE_HOST,
         dialect: 'postgres',
-        logging: false, 
+        logging: false
       },
     )
   }
@@ -19,6 +21,7 @@ class sequelize {
   init(){
     return this.connection;
   }
+
   async testDatabase(){
     try {
       await this.connection.authenticate()

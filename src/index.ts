@@ -1,7 +1,7 @@
 import app from './app';
 
 const bootstrap = ()=>{
-  new app().intServer();
+  new app().initServer();
 }
 
 

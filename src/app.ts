@@ -20,7 +20,7 @@ class App {
     this.app = express();
   }
 
-  async intServer(){
+  async initServer(){
     this.app.use(express.urlencoded({ extended:true }))
     this.app.use(express.json())
     this.app.use(cookieParser())

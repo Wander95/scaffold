@@ -1,7 +1,7 @@
 import { config } from 'dotenv'; config({})
 
 const CONFIG = {
-  NODE_PORT: Number(process.env.NODE_PORT) || 3000,
+  NODE_PORT: Number(process.env.NODE_PORT) || 3002,
   
   DB_CONFIG:{
     SEQUELIZE_USER: process.env.SEQUELIZE_USER || '', 

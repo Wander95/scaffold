@@ -1,19 +1,33 @@
+import TestDataController from "../controllers/test-data.controller";
 import { Router } from "express";
+import ValidationMiddleware from '../middlewares/validation.middleware';
+import TestDataSchema from  '../validators/test-data.validators';
 
-class TestDataRoute {
-  private router: Router;
+interface BaseRoute {
+  readonly router: Router;
+  generateRoutes():Router
+}
+
+class TestDataRoute extends ValidationMiddleware implements BaseRoute{
+  readonly router: Router;
 
   constructor(){
-    this.router = Router()
+    super()
+    this.router = Router();
   }
 
-  initRoutes(){
-    this.router.get('/test-data')
-    this.router.get('/test-data/:testDataId')
-    this.router.post('/test-data')
-    this.router.put('/test-data/:testDataId')
-    this.router.delete('/test-data/:testDataId')
+  initRoutes():void {
+    this.router.get('/test-data',TestDataController.getAllTestData)
+    this.router.get('/test-data/:testDataId',this.validateParams,TestDataController.getOneTestData)
+    this.router.post('/test-data',this.validateBody(TestDataSchema.getSchema('POST')),TestDataController.postOneTestData)
+    this.router.put('/test-data/:testDataId',this.validateBody(TestDataSchema.getSchema('PUT')),this.validateParams,TestDataController.putOneTestData)
+    this.router.delete('/test-data/:testDataId',this.validateParams,TestDataController.deleteOneTestData)
+  }
+
+  generateRoutes():Router {
+    this.initRoutes()
+    return this.router;
   }
 }
 
-export default TestDataRoute;
+export default new TestDataRoute();
